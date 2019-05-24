@@ -46,7 +46,7 @@
         0 0 0 4px rgba(0,0,0,0.1),
         inset 0 0 0 3px #EFEFEF,
         inset 0 0 10px black,
-        0 0 10px rgba(0,0,0,0.2);
+        0 0 10px rgba(0, 0, 0, 0.2);
     }
 
     .clock-face {
@@ -61,11 +61,30 @@
       height: 6px;
       background: black;
       position: absolute;
-      top: 50%;
+      top: calc(50% - 3px);
+      right: 50%;
+      transform-origin: 100%;
+      transform: rotate(90deg);
+      transition: all 0.05s;
+      transition-timing-function: cubic-bezier(0.1, 2.7, 0.58, 1);
+    }
+
+    .hour-hand {
+      width: 30%;
+    }
+
+    .min-hand {
+      width: 40%;
+    }
+
+    .second-hand {
+      height: 2px;
+      top: calc(50% - 1px);
+      background: red;
     }
 
   </style>
 
-  <script></script>
+  <script src="index.js"></script>
 </body>
 </html>
