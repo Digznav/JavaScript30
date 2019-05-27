@@ -21,6 +21,11 @@
   <img src="https://source.unsplash.com/7bwQXzbF6KE/800x500">
 
   <style>
+    :root {
+      --spacing: 0px;
+      --blur: 0px;
+      --base: #fff;
+    }
 
     /*
       misc styles, nothing to do with CSS variables
@@ -42,9 +47,49 @@
     input {
       width: 100px;
     }
+
+    .hl {
+      color: var(--base);
+    }
+
+    img {
+      border: var(--spacing) solid var(--base);
+      filter: blur(var(--blur));
+    }
   </style>
 
   <script>
+    const root = document.documentElement;
+
+    const spacing = document.querySelector('#spacing');
+    const blur = document.querySelector('#blur');
+    const base = document.querySelector('#base');
+
+    const spacingUnits = spacing.dataset.sizing;
+    const blurUnits = blur.dataset.sizing;
+
+    const setSpacing = (e) => {
+      const actualSpacing = e ? e.target.value : spacing.value;
+      root.style.setProperty('--spacing', `${actualSpacing}${spacingUnits}`);
+    };
+    
+    const setBlur = (e) => {
+      const actualBlur = e ? e.target.value : blur.value;
+      root.style.setProperty('--blur', `${actualBlur}${blurUnits}`);
+    };
+    
+    const setBase = (e) => {
+      const actualBase = e ? e.target.value : base.value;
+      root.style.setProperty('--base', `${actualBase}`);
+    };
+
+    spacing.addEventListener('change', setSpacing);
+    blur.addEventListener('change', setBlur);
+    base.addEventListener('change', setBase);
+
+    setSpacing();
+    setBlur();
+    setBase();
   </script>
 
 </body>
