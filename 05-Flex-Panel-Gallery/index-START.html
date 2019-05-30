@@ -26,6 +26,8 @@
     .panels {
       min-height: 100vh;
       overflow: hidden;
+      display: flex;
+      flex-wrap: wrap;
     }
 
     .panel {
@@ -33,7 +35,11 @@
       box-shadow: inset 0 0 0 5px rgba(255,255,255,0.1);
       color: white;
       text-align: center;
+      flex-grow: 1;
       align-items: center;
+      justify-content: center;
+      display: flex;
+      flex-direction: column;
       /* Safari transitionend event.propertyName === flex */
       /* Chrome + FF transitionend event.propertyName === flex-grow */
       transition:
@@ -63,14 +69,25 @@
       font-family: 'Amatic SC', cursive;
       text-shadow: 0 0 4px rgba(0, 0, 0, 0.72), 0 0 14px rgba(0, 0, 0, 0.45);
       font-size: 2em;
+      transform: translateY(-100vh);
     }
     
     .panel p:nth-child(2) {
+      transform: none;
       font-size: 4em;
+    }
+
+    .panel p:nth-child(2) + p {
+      transform: translateY(100vh);
     }
 
     .panel.open {
       font-size: 40px;
+      flex: 6;
+    }
+
+    .panel.animation-finished p {
+      transform: none !important;
     }
 
   </style>
@@ -105,7 +122,21 @@
   </div>
 
   <script>
+    var panels = document.querySelectorAll('.panel');
 
+    panels.forEach(panel => {
+      panel.addEventListener('click', () => {
+        panel.classList.toggle('open');
+      });
+
+      panel.addEventListener('transitionend', () => {
+        if (panel.classList.contains('open')) {
+          panel.classList.add('animation-finished');
+        } else {
+          panel.classList.remove('animation-finished');
+        }
+      });
+    });
   </script>
 
 
