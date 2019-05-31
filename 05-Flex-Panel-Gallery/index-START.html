@@ -26,14 +26,19 @@
     .panels {
       min-height: 100vh;
       overflow: hidden;
+      display: flex;
+      align-items: stretch;
     }
 
     .panel {
+      display: flex;
+      flex-direction: column;
       background: #6B0F9C;
       box-shadow: inset 0 0 0 5px rgba(255,255,255,0.1);
       color: white;
       text-align: center;
       align-items: center;
+      justify-content: center;
       /* Safari transitionend event.propertyName === flex */
       /* Chrome + FF transitionend event.propertyName === flex-grow */
       transition:
@@ -43,6 +48,7 @@
       font-size: 20px;
       background-size: cover;
       background-position: center;
+      flex-grow: 1;
     }
 
     .panel1 { background-image:url(https://source.unsplash.com/gYl-UtwNg_I/1500x1500); }
@@ -59,20 +65,41 @@
     }
 
     .panel p {
+      display: flex;
       text-transform: uppercase;
       font-family: 'Amatic SC', cursive;
       text-shadow: 0 0 4px rgba(0, 0, 0, 0.72), 0 0 14px rgba(0, 0, 0, 0.45);
       font-size: 2em;
+      flex-grow: 1;
+      align-items: center;
+      justify-content: center;
     }
     
     .panel p:nth-child(2) {
       font-size: 4em;
+      flex-grow: 3;
+    }
+
+    p:nth-child(1){
+      transform: translateY(-100%);
+    }
+
+    p:nth-child(3){
+      transform: translateY(100%);
+    }
+
+    .panel.active p:first-child {
+      transform: translateY(0);
+    }
+
+    .panel.active p:last-child {
+      transform: translateY(0);
     }
 
     .panel.open {
       font-size: 40px;
+      flex: 5;
     }
-
   </style>
 
 
@@ -105,10 +132,13 @@
   </div>
 
   <script>
-
+    var panel = document.querySelectorAll('.panel');
+    panel.forEach(function(p){
+      p.addEventListener('click', function(){
+        p.classList.contains('active') ? p.classList.remove('active') : p.classList.add('active');
+        p.classList.contains('open') ? p.classList.remove('open') : p.classList.add('open');
+      });
+    });
   </script>
-
-
-
 </body>
 </html>
