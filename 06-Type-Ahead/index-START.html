@@ -16,7 +16,36 @@
   </form>
 <script>
 const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
+const search = document.querySelector('.search');
+const suggestions = document.querySelector('.suggestions');
+const cities = [];
+getData(endpoint);
 
+search.addEventListener('input', (e) => {
+  const searchValue = e.target.value;
+  const regExp = new RegExp(searchValue, 'gi');
+  const matches = getMatches(cities, regExp);
+
+  suggestions.innerHTML = getSuggestions(matches, regExp, searchValue) || `<li>☹️ No items found</li>`;
+});
+
+const getMatches = (items, regExp) => items.filter(item => regExp.exec(item.city) || regExp.exec(item.state));
+
+const getSuggestions = (matches, regExp, searchValue) => (matches.reduce((acc, item) => {
+  const cityName = item.city.replace(regExp, `<span class="hl">${searchValue}</span>`);
+  const stateName = item.state.replace(regExp, `<span class="hl">${searchValue}</span>`);
+
+  const name = `<span class="name">${cityName}, ${stateName}</span>`;
+  const population = `<span class="population">${item.population}</span>`;
+
+  return `${acc}<li>${name}${population}</li>`;
+}, ''))
+
+async function getData(endpoint) {
+  const response = await fetch(endpoint);
+  const data = await response.json();
+  cities.push(...data);
+}
 </script>
 </body>
 </html>
