@@ -96,6 +96,35 @@
   </div>
 
 <script>
+  var shiftIsPressed = false;
+  var currentCheckIdx = 0;
+  var inputStartIdx = 0;
+  var inputsToCheck = [];
+  const inputs = document.querySelectorAll('input');
+
+  document.addEventListener('keydown', e => shiftIsPressed = e.key === 'Shift');
+  document.addEventListener('keyup', e => shiftIsPressed = false);
+
+  inputs.forEach((input, idx) => {
+    input.addEventListener('change', e => {
+      if (idx >= currentCheckIdx) {
+        // forward
+        inputsToCheck = Array.from(inputs).slice(currentCheckIdx, idx);
+        inputStartIdx = 0;
+      } else {
+        // backwards
+        inputsToCheck = Array.from(inputs).slice(idx, currentCheckIdx);
+        inputStartIdx = inputsToCheck.length;
+      }
+
+      if (shiftIsPressed) {
+        inputsToCheck.forEach(input => input.checked = true);
+      }
+
+      currentCheckIdx = idx;
+      inputsToCheck = [];
+    });
+  });
 </script>
 </body>
 </html>
