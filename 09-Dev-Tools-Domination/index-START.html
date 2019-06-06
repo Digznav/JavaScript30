@@ -18,29 +18,61 @@
     }
 
     // Regular
+    console.log('hello');
 
     // Interpolated
+    console.log('Hello I am a %s string!', '💩');
 
     // Styled
+    console.log('%c I am some great text', 'font-size: 50px; background: red; color: white;');
 
     // warning!
+    console.warn('warning');
 
     // Error :|
+    console.error('error');
 
     // Info
+    console.info('info');
 
     // Testing
+    const p = document.querySelector('p');
+    console.assert(1 == 1, 'failed');
+    console.assert(p.classList.contains('ouch'), 'p doesn\'t contains class ouch');
 
     // clearing
+    console.clear();
 
     // Viewing DOM Elements
+    console.log(p);
+    console.dir(p);
 
     // Grouping together
+    console.group('group1');
+    console.log('1');
+    console.log('2');
+    console.log('3');
+    console.log('4');
+    console.groupEnd('group1');
+    
+    console.groupCollapsed('group2');
+    console.log('4');
+    console.log('3');
+    console.log('2');
+    console.log('1');
+    console.groupEnd('group2');
 
     // counting
+    console.count('plop');
+    console.count('plop');
+    console.count('plop');
+    console.count('plop');
 
     // timing
-
+    console.time('time');
+    setTimeout(() => {
+      console.timeEnd('time');
+    }, 2500);
   </script>
 </body>
 </html>
