@@ -10,15 +10,14 @@ var player = document.querySelector(".viewer");
 
 
 
-toggle.addEventListener('click', function(){
+toggle.addEventListener('click', function () {
     if (player.paused) {
         player.play();
         button.innerHTML = "❚ ❚";
-        }
-    else  {
-        player.pause(); 
+    } else {
+        player.pause();
         button.innerHTML = "►";
-        }
+    }
     //this.paused? this.play() : this.pause()
     // if(player.play() =! true){
     //     player.play();
@@ -27,13 +26,19 @@ toggle.addEventListener('click', function(){
     // else{
     //     player.pause();
     // }
-}); 
+});
 
-progress.addEventListener('timeupdate', function(){
-    
-console.log(progress);
-}); 
+progress.addEventListener('timeupdate', function () {
 
+    console.log(progress);
+    currentPos = progress.currentTime; //get currentime
+    maxduration = progress.duration; //get video duration
+    percentage = (100 * currentPos / maxduration);
+   
+});
+function volume(){
+
+}
 
 
 //console.log(play);
@@ -42,9 +47,10 @@ console.log(progress);
 
 // console.log(play);
 
-function playVideo() {
-    player.play();
-}
-function pauseVideo() {
-    player.pause();
-}
+// function playVideo() {
+//     player.play();
+// }
+
+// function pauseVideo() {
+//     player.pause();
+// }
