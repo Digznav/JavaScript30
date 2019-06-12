@@ -22,13 +22,80 @@
     <form class="add-items">
       <input type="text" name="item" placeholder="Item Name" required>
       <input type="submit" value="+ Add Item">
+      <br>
+      <br clear="all">
+      <button class="taco-all">🌮 All</button>
+      <button class="un-taco-all">⬜️ All</button>
     </form>
   </div>
 
 <script>
   const addItems = document.querySelector('.add-items');
   const itemsList = document.querySelector('.plates');
-  const items = [];
+  const button = document.querySelector('input[type="submit"]');
+  const input = document.querySelector('input[type="text"]');
+  const localItems = localStorage.getItem('items');
+  const items = localItems ? JSON.parse(localItems) : [];
+  const tacoAll = document.querySelector('.taco-all');
+  const unTacoAll = document.querySelector('.un-taco-all');
+  renderItems();
+
+  tacoAll.addEventListener('click', e => {
+    e.preventDefault();
+    items.forEach(item => item.checked = true);
+
+    renderItems();
+    updateLocalStorage();
+  });
+  
+  unTacoAll.addEventListener('click', e => {
+    e.preventDefault();
+    items.forEach(item => item.checked = false);
+
+    renderItems();
+    updateLocalStorage();
+  });
+
+  itemsList.addEventListener('click', e => {
+    const checkbox = e.target.getAttribute('data-index') ? e.target : null;
+
+    if (!checkbox) return;
+
+    const idx = checkbox.getAttribute('data-index');
+    items[idx].checked = !items[idx].checked;
+
+    updateLocalStorage();
+  });
+
+  button.addEventListener('click', e => {
+    e.preventDefault();
+
+    const item = input.value;
+
+    items.push({
+      name: item,
+      checked: false
+    });
+
+    input.value = '';
+
+    renderItems();
+    updateLocalStorage();
+  });
+
+  function renderItems() {
+    let itemsHTML = '';
+
+    items.forEach((item, idx) => {
+      itemsHTML += `<li><input type="checkbox" data-index=${idx} id="item${idx}" ${item.checked ? 'checked' : ''} /><label for="item${idx}">${item.name}</label></li>`;
+    });
+  
+    itemsList.innerHTML = itemsHTML;
+  }
+
+  function updateLocalStorage() {
+    localStorage.setItem('items', JSON.stringify(items));
+  }
 
 </script>
 
