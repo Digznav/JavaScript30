@@ -33,8 +33,29 @@
     font-size: 100px;
   }
   </style>
-
 <script>
+  const hero = document.querySelector('.hero');
+  const h1 = document.querySelector('h1');
+  const middleScreen = {
+    x: window.innerWidth / 2,
+    y: window.innerHeight / 2
+  }
+
+  hero.addEventListener('mousemove', e => {
+    const x = e.clientX;
+    const y = e.clientY;
+    
+    const shadows = [
+      `${middleScreen.x - x}px ${middleScreen.y - y}px 0 papayawhip`,
+      `${x - middleScreen.x}px ${x - middleScreen.x}px 0 aliceblue`,
+      `${x - middleScreen.x}px ${(x - middleScreen.x) * -1}px 0 lightseagreen`,
+      `${middleScreen.x - x}px ${(middleScreen.y - y) * -1}px 0 springgreen`,
+    ];
+
+    console.log(shadows.join(', '));
+
+    h1.style.textShadow = shadows.join(', ');
+  });
 </script>
 </body>
 </html>
