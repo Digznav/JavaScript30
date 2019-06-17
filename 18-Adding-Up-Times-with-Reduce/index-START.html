@@ -182,6 +182,23 @@
     </li>
   </ul>
 <script>
+  const lis = document.querySelectorAll('li');
+  const measuredTime = new Date(null);
+
+  const totalTime = [...lis].reduce((acc, current) => {
+    const time = current.dataset.time;
+    const [minutes, seconds] = time.split(':');
+
+    acc[0] += parseInt(minutes);
+    acc[1] += parseInt(seconds);
+
+    return acc;
+  }, [0, 0]);
+
+  measuredTime.setMinutes(totalTime[0]);
+  measuredTime.setSeconds(totalTime[1]);
+
+  console.log(measuredTime.toISOString().substr(11, 8));
 </script>
 </body>
 </html>
