@@ -12,7 +12,19 @@
 <script>
   window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
+  const recognition = new SpeechRecognition;
+  const words = document.querySelector('.words');
+  recognition.lang = 'es-MX';
+  recognition.continuous = true;
 
+  recognition.start();
+
+  recognition.addEventListener('result', function(event) {
+    const { transcript } = event.results[event.results.length - 1][0];
+    words.innerHTML += `<p>${transcript}</p>`;
+  });
+
+  recognition.addEventListener('end', recognition.start);
 </script>
 
 
