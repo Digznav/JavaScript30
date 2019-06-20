@@ -3,13 +3,15 @@ var browserSync = require("browser-sync");
 
 // Start the server
 browserSync({
-    port: 8080,
-    files: ['**/*.css', '**/*.js', '**/*.html', './index.html'],
-    watch: true,
-    server: './',
-    watchEvents: [
-        'change',
-        'add',
-        'unlink'
-    ]
+  port: 8080,
+  files: ['**/*.css', '**/*.js', '**/*.html', './index.html'],
+  watch: true,
+  server: './',
+  watchEvents: [
+    'change',
+    'add',
+    'unlink'
+  ]
+  // For Ex 21: Geolocation
+  // https: true
 });
