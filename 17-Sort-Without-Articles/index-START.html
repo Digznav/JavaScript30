@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Sort Without Articles</title>
 </head>
+
 <body>
 
   <style>
@@ -26,12 +28,12 @@
       padding: 0;
       box-shadow: 0 0 0 20px rgba(0, 0, 0, 0.05);
     }
-    
+
     #bands li {
       border-bottom: 1px solid #efefef;
       padding: 20px;
     }
-    
+
     #bands li:last-child {
       border-bottom: 0;
     }
@@ -40,16 +42,55 @@
       color: #ffc600;
       text-decoration: none;
     }
-
   </style>
 
   <ul id="bands"></ul>
 
-<script>
-const bands = ['The Plot in You', 'The Devil Wears Prada', 'Pierce the Veil', 'Norma Jean', 'The Bled', 'Say Anything', 'The Midway State', 'We Came as Romans', 'Counterparts', 'Oh, Sleeper', 'A Skylit Drive', 'Anywhere But Here', 'An Old Dog'];
+  <script>
+    const bands = ['The Plot in You', 'The Devil Wears Prada', 'Pierce the Veil', 'Norma Jean', 'The Bled',
+      'Say Anything', 'The Midway State', 'We Came as Romans', 'Counterparts', 'Oh, Sleeper', 'A Skylit Drive',
+      'Anywhere But Here', 'An Old Dog', 'Foo fighters', 'The Joy Formidable', 'Weezer'
+    ];
+
+    //creates ul
+    var ul = document.createElement('ul');
+    document.getElementById('bands').appendChild(ul);
 
 
-</script>
+    //compare
+    var compare = function (a, b) {
+      var aTitle = a.toLowerCase();
+      var bTitle = b.toLowerCase();
+
+      aTitle = removeArticles(aTitle);
+      bTitle = removeArticles(bTitle);
+
+      if (aTitle > bTitle) return 1;
+      if (aTitle < bTitle) return -1;
+      return 0;
+    };
+
+    //remove Articles
+    function removeArticles(str) {
+      words = str.split(" ");
+      if (words.length <= 1) return str;
+      if (words[0] == 'a' || words[0] == 'the' || words[0] == 'an')
+        return words.splice(1).join(" ");
+      return str;
+    }
+
+    //sort bands
+    var sortedBands = bands.sort(compare);
+    console.log(sortedBands);
+
+    //adds li elements
+    bands.forEach(function (name) {
+      var li = document.createElement('li');
+      ul.appendChild(li);
+      li.innerHTML += name;
+    });
+  </script>
 
 </body>
+
 </html>

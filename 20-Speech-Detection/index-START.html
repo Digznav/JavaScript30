@@ -1,19 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Speech Detection</title>
 </head>
+
 <body>
 
   <div class="words" contenteditable>
   </div>
 
-<script>
-  window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  <script>
+    window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    const recognition = new SpeechRecognition();
+    recognition.interimResults = true;
 
 
-</script>
+    let p = document.createElement('p');
+    const words = document.querySelector('.words');
+    words.appendChild(p);
+
+    recognition.addEventListener('result', e => {
+      console.log(e.results)
+
+      const transcript = Array.from[e.results]
+        .map(result => result[0])
+        .map(result => result.transcript)
+        .join('')
+
+        p.textcontent = transcript;
+        consoloe.log(transcript)
+
+      if (e.results[0].isFinal) {
+          p = document.createElement('p');
+          words.appendChild(p);
+      }
+    });
+
+    
+    //  window.SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
+    //   let finalTranscript = '';
+    //   let recognition = new window.SpeechRecognition();
+    //   recognition.interimResults = true;
+    //   recognition.maxAlternatives = 10;
+    //   recognition.continuous = true;
+    //   recognition.onresult = (event) => {
+    //     let interimTranscript = '';
+    //     for (let i = event.resultIndex, len = event.results.length; i < len; i++) {
+    //       let transcript = event.results[i][0].transcript;
+    //       if (event.results[i].isFinal) {
+    //         finalTranscript += transcript;
+    //       } else {
+    //         interimTranscript += transcript;
+    //       }
+    //     }
+    //     document.querySelector('.words').innerHTML = finalTranscript + '<i style="color:#ddd;">' + interimTranscript + '</>';
+    //   }
+    //   recognition.start();
+  </script>
 
 
   <style>
@@ -33,14 +79,14 @@
       margin: 50px auto;
       background: white;
       border-radius: 5px;
-      box-shadow: 10px 10px 0 rgba(0,0,0,0.1);
+      box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.1);
       padding: 1rem 2rem 1rem 5rem;
       background: -webkit-gradient(linear, 0 0, 0 100%, from(#d9eaf3), color-stop(4%, #fff)) 0 4px;
       background-size: 100% 3rem;
       position: relative;
       line-height: 3rem;
     }
-    
+
     p {
       margin: 0 0 3rem;
     }
@@ -58,4 +104,5 @@
   </style>
 
 </body>
+
 </html>

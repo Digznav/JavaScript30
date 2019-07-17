@@ -27,6 +27,21 @@
 
   <script>
     // 👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀
+
+    const triggers = document.querySelectorAll('a');
+    const anchors = document.createElement('span')
+    anchors.classList.add('transition'); 
+
+
+    // const borders = this.getBoundingClientRect();
+    // console.log(borders);
+
+    function highlightLink(){
+      
+    }
+
+    triggers.forEach(a => a.addEventListener('mouseenter', highlightLink));
+    console.log(highlightLink)
   </script>
 </body>
 </html>

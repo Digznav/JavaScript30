@@ -11,5 +11,6 @@ browserSync({
         'change',
         'add',
         'unlink'
-    ]
+    ],
+    https: 'true'
 });

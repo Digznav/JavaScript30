@@ -182,6 +182,45 @@
     </li>
   </ul>
 <script>
+
+var videos = document.querySelectorAll('[data-time]');
+
+console.log(Array.from(videos));
+
+const list = Array.from(videos);
+
+for (i = 0; i < list.length; i++) { 
+    // console.log(list[i]);
+
+    //list.dataset.time = string.split(':');
+    console.log(list[i]);
+
+    // var measuredTime = new Date(null);
+
+    
+    // measuredTime.setSeconds(list[i].dataset.time); // specify value of SECONDS
+    // var MHSTime = measuredTime.toISOString().substr(11, 8);
+    // console.log(MHSTime)
+
+
+    // var total = total + list[i].dataset.time; 
+    
+} 
+// console.log(total)
+// document.querySelector("li").addEventListener('timeupdate', function() {
+//     document.getElementById("timer").innerHTML = this.currentTime;
+//     currentTime = this.currentTime;
+// });
+
+// video1 = videojs('mplayer');
+// video1.on('durationchange', event);
+
+// var video1 = function(){
+//   currentTime = video1.currentTime; // nothing
+// }
+
+
+
 </script>
 </body>
 </html>

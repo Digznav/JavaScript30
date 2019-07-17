@@ -30,6 +30,23 @@
   const itemsList = document.querySelector('.plates');
   const items = [];
 
+//  localStorage.setItem(addItems.value);
+  
+ 
+  var testObject = { 'one': 1, 'two': 2, 'three': 3 };
+
+// Put the object into storage
+localStorage.setItem('testObject', JSON.stringify(testObject));
+
+// Retrieve the object from storage
+var retrievedObject = localStorage.getItem('testObject');
+
+console.log('retrievedObject: ', JSON.parse(retrievedObject));
+
+
+  document.getElementById('.plates').innerHTML = '<li><input type="checkbox" data-index="${idx}" id="item${idx}"><label for="item${idx}">${itm}</label></li>';
+
+
 </script>
 
 
